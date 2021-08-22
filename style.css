@@ -1,0 +1,12 @@
+.background {
+  background-color: rgb(255, 174, 0);
+}
+
+.main-header {
+  font-family: "Viga", sans-serif;
+  font-size: 65px;
+  color: rgb(6, 133, 218);
+  text-align: center;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
