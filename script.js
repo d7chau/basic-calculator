@@ -64,10 +64,13 @@ function handleRemainder(num1, num2) {
 }
 
 function convertPositiveNegative(num) {
-  if (num >= 0) {
-    return -Math.abs(num); //positive to negative
+  strNum = num.toString();
+  if (num < 0) {
+    result = Math.abs(strNum); //negative to positive
+    displayText.textContent = Math.abs(strNum);
   } else {
-    return Math.abs(num); //negative to positive
+    result = -Math.abs(strNum); //positive to negative
+    displayText.textContent = -Math.abs(strNum);
   }
 }
 
@@ -99,7 +102,7 @@ function clearDisplay() {
 }
 
 function computeAnswer() {
-  var result = operatorNumberArray[0];
+  result = operatorNumberArray[0];
 
   for (i = 1; i < operatorNumberArray.length; i += 2) {
     operator = operatorNumberArray[i];
