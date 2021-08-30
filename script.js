@@ -20,6 +20,7 @@ var divideBtn = document.getElementById("divideBtn");
 var decimalBtn = document.getElementById("decimalBtn");
 var equalBtn = document.getElementById("equalBtn");
 var displayText = document.getElementById("displayText");
+var displayHistory = document.getElementById("displayHistory");
 
 zeroBtn.addEventListener("click", () => changeDisplay(0));
 oneBtn.addEventListener("click", () => changeDisplay(1));
@@ -38,8 +39,9 @@ multiplyBtn.addEventListener("click", () => changeDisplay("x"));
 divideBtn.addEventListener("click", () => changeDisplay("/"));
 decimalBtn.addEventListener("click", () => changeDisplay("."));
 equalBtn.addEventListener("click", () => computeAnswer());
-acBtn.addEventListener("click", () => changeDisplay(""));
-plusMinusBtn.addEventListener("click", () => convertPosNeg(result));
+equalBtn.addEventListener("click", () => changeDisplay("="));
+acBtn.addEventListener("click", () => clearDisplay());
+plusMinusBtn.addEventListener("click", () => convertPositiveNegative(result));
 
 function handleAdd(num1, num2) {
   return num1 + num2;
@@ -75,7 +77,7 @@ function handleOperate(operator, num1, num2) {
   }
 }
 
-function convertPosNeg(num) {
+function convertPositiveNegative(num) {
   if (num >= 0) {
     return -Math.abs(num); //positive to negative
   } else {
@@ -84,8 +86,16 @@ function convertPosNeg(num) {
 }
 
 function changeDisplay(text) {
-  displayText.textContent = text;
-  operatorNumberArray.push(text);
+  if (displayHistory.textContent.length <= "24") {
+    displayHistory.textContent += text;
+    operatorNumberArray.push(text);
+  }
+}
+
+function clearDisplay() {
+  displayText.textContent = "";
+  displayHistory.textContent = "";
+  operatorNumberArray = [];
 }
 
 function computeAnswer() {

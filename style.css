@@ -31,6 +31,7 @@
   background-color: rgb(87, 87, 87);
   height: 100px;
   width: 335px;
+  max-width: 335px;
   border-radius: 20px;
 
   /*center*/
@@ -45,8 +46,16 @@
 .calc-display-text {
   color: white;
   font-family: "sans-serif";
-  font-size: 30px;
-  padding: 15px 60px 0px 300px;
+  font-size: 40px;
+  font-weight: bold;
+  padding: 8px 60px 0px 10px;
+}
+
+.calc-display-history {
+  color: white;
+  font-family: "sans-serif";
+  font-size: 20px;
+  padding: 13px 60px 0px 10px;
 }
 
 .number-btn {
