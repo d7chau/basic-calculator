@@ -1,4 +1,5 @@
 var operatorNumberArray = [];
+var result = operatorNumberArray;
 
 var oneBtn = document.getElementById("oneBtn");
 var twoBtn = document.getElementById("twoBtn");
@@ -38,39 +39,47 @@ divideBtn.addEventListener("click", () => changeDisplay("/"));
 decimalBtn.addEventListener("click", () => changeDisplay("."));
 equalBtn.addEventListener("click", () => computeAnswer());
 acBtn.addEventListener("click", () => changeDisplay(""));
-// plusMinusBtn.addEventListener("click", () => changeDisplay(""));
+plusMinusBtn.addEventListener("click", () => convertPosNeg(result));
 
-function add(a, b) {
-  return a + b;
+function handleAdd(num1, num2) {
+  return num1 + num2;
 }
 
-function subtract(a, b) {
-  return a - b;
+function handleSubtract(num1, num2) {
+  return num1 - num2;
 }
 
-function multiply(a, b) {
-  return a * b;
+function handleMultiply(num1, num2) {
+  return num1 * num2;
 }
 
-function divide(a, b) {
-  return a / b;
+function handleDivide(num1, num2) {
+  return num1 / num2;
 }
 
-function remainder(a, b) {
-  return ((a % b) + b) % b;
+function handleRemainder(num1, num2) {
+  return ((num1 % num2) + num2) % num2; //needed b/c just % in JS is not a true modulus operator
 }
 
-function operate(operator, num1, num2) {
+function handleOperate(operator, num1, num2) {
   if (operator === "+") {
-    return add(num1, num2);
+    return handleAdd(num1, num2);
   } else if (operator === "-") {
-    return subtract(num1, num2);
+    return handleSubtract(num1, num2);
   } else if (operator === "x") {
-    return multiply(num1, num2);
+    return handleMultiply(num1, num2);
   } else if (operator === "/") {
-    return divide(num1, num2);
+    return handleDivide(num1, num2);
   } else {
-    return remainder(num1, num2);
+    return handleRemainder(num1, num2);
+  }
+}
+
+function convertPosNeg(num) {
+  if (num >= 0) {
+    return -Math.abs(num); //positive to negative
+  } else {
+    return Math.abs(num); //negative to positive
   }
 }
 
@@ -86,10 +95,8 @@ function computeAnswer() {
     operator = operatorNumberArray[i];
     number = operatorNumberArray[i + 1];
 
-    result = operate(operator, result, number);
+    result = handleOperate(operator, result, number);
   }
   displayText.textContent = result;
   operatorNumberArray = [];
 }
-
-// operate("+", 1, 4);
