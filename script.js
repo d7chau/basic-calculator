@@ -63,6 +63,14 @@ function handleRemainder(num1, num2) {
   return ((num1 % num2) + num2) % num2; //needed b/c just % in JS is not a true modulus operator
 }
 
+function convertPositiveNegative(num) {
+  if (num >= 0) {
+    return -Math.abs(num); //positive to negative
+  } else {
+    return Math.abs(num); //negative to positive
+  }
+}
+
 function handleOperate(operator, num1, num2) {
   if (operator === "+") {
     return handleAdd(num1, num2);
@@ -74,14 +82,6 @@ function handleOperate(operator, num1, num2) {
     return handleDivide(num1, num2);
   } else {
     return handleRemainder(num1, num2);
-  }
-}
-
-function convertPositiveNegative(num) {
-  if (num >= 0) {
-    return -Math.abs(num); //positive to negative
-  } else {
-    return Math.abs(num); //negative to positive
   }
 }
 
@@ -104,9 +104,9 @@ function computeAnswer() {
   for (i = 1; i < operatorNumberArray.length; i += 2) {
     operator = operatorNumberArray[i];
     number = operatorNumberArray[i + 1];
-
     result = handleOperate(operator, result, number);
   }
+
   displayText.textContent = result;
   operatorNumberArray = [];
 }
