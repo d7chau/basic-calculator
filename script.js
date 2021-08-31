@@ -1,5 +1,5 @@
 var operatorNumberArray = [];
-var result = operatorNumberArray;
+var result = [];
 
 var oneBtn = document.getElementById("oneBtn");
 var twoBtn = document.getElementById("twoBtn");
@@ -39,7 +39,7 @@ multiplyBtn.addEventListener("click", () => changeDisplay("x"));
 divideBtn.addEventListener("click", () => changeDisplay("/"));
 decimalBtn.addEventListener("click", () => changeDisplay("."));
 equalBtn.addEventListener("click", () => computeAnswer());
-equalBtn.addEventListener("click", () => changeDisplay("="));
+// equalBtn.addEventListener("click", () => changeDisplay("="));
 acBtn.addEventListener("click", () => clearDisplay());
 plusMinusBtn.addEventListener("click", () => convertPositiveNegative(result));
 
@@ -90,8 +90,49 @@ function handleOperate(operator, num1, num2) {
 
 function changeDisplay(text) {
   if (displayHistory.textContent.length <= "24") {
-    displayHistory.textContent += text;
-    operatorNumberArray.push(text);
+    var lastValue = operatorNumberArray[operatorNumberArray.length - 1];
+    if (areBothNumeric(text, lastValue) == true && lastValue != undefined) {
+      var combinedValues = 0;
+      lastValue = lastValue.toString();
+      text = text.toString();
+      combinedValues = Number(lastValue + text);
+      operatorNumberArray[operatorNumberArray.length - 1] = combinedValues;
+      displayHistory.textContent += text;
+    } else if (
+      areBothOperatorOrDecimal(text, lastValue) == true &&
+      lastValue != undefined
+    ) {
+      //do nothing
+    } else {
+      //if its mixed with numeric and other stuff
+      displayHistory.textContent += text;
+      operatorNumberArray.push(text);
+    }
+  }
+}
+
+function isNumeric(text) {
+  if (
+    text == "+" ||
+    text == "-" ||
+    text == "x" ||
+    text == "/" ||
+    text == "%" ||
+    text == "."
+  ) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+function areBothOperatorOrDecimal(text1, text2) {
+  return isNumeric(text1) == false && isNumeric(text2) == false;
+}
+
+function areBothNumeric(text1, text2) {
+  if (isNumeric(text1) == true && isNumeric(text2) == true) {
+    return true;
   }
 }
 
@@ -110,6 +151,16 @@ function computeAnswer() {
     result = handleOperate(operator, result, number);
   }
 
-  displayText.textContent = result;
-  operatorNumberArray = [];
+  displayText.textContent = roundAnswer(result);
+  operatorNumberArray = [roundAnswer(result)];
+  displayHistory.textContent += "=";
+}
+
+function roundAnswer(result) {
+  if (result % 1 != 0) {
+    //if answer has decimals
+    return result.toFixed(9);
+  } else {
+    return result;
+  }
 }
