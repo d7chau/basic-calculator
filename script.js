@@ -11,13 +11,12 @@ var sevenBtn = document.getElementById("sevenBtn");
 var eightBtn = document.getElementById("eightBtn");
 var nineBtn = document.getElementById("nineBtn");
 var acBtn = document.getElementById("acBtn");
-var plusminusBtn = document.getElementById("plusMinusBtn");
+var powerBtn = document.getElementById("powerBtn");
 var remainderBtn = document.getElementById("remainderBtn");
 var addBtn = document.getElementById("addBtn");
 var subtractBtn = document.getElementById("subtractBtn");
 var multiplyBtn = document.getElementById("multiplyBtn");
 var divideBtn = document.getElementById("divideBtn");
-var decimalBtn = document.getElementById("decimalBtn");
 var equalBtn = document.getElementById("equalBtn");
 var displayText = document.getElementById("displayText");
 var displayHistory = document.getElementById("displayHistory");
@@ -37,11 +36,9 @@ addBtn.addEventListener("click", () => changeDisplay("+"));
 subtractBtn.addEventListener("click", () => changeDisplay("-"));
 multiplyBtn.addEventListener("click", () => changeDisplay("x"));
 divideBtn.addEventListener("click", () => changeDisplay("/"));
-decimalBtn.addEventListener("click", () => changeDisplay("."));
+powerBtn.addEventListener("click", () => changeDisplay("^"));
 equalBtn.addEventListener("click", () => computeAnswer());
-// equalBtn.addEventListener("click", () => changeDisplay("="));
 acBtn.addEventListener("click", () => clearDisplay());
-plusMinusBtn.addEventListener("click", () => convertPositiveNegative(result));
 
 function handleAdd(num1, num2) {
   return num1 + num2;
@@ -63,15 +60,8 @@ function handleRemainder(num1, num2) {
   return ((num1 % num2) + num2) % num2; //needed b/c just % in JS is not a true modulus operator
 }
 
-function convertPositiveNegative(num) {
-  strNum = num.toString();
-  if (num < 0) {
-    result = Math.abs(strNum); //negative to positive
-    displayText.textContent = Math.abs(strNum);
-  } else {
-    result = -Math.abs(strNum); //positive to negative
-    displayText.textContent = -Math.abs(strNum);
-  }
+function handlePower(num1, num2) {
+  return Math.pow(num1, num2);
 }
 
 function handleOperate(operator, num1, num2) {
@@ -83,8 +73,10 @@ function handleOperate(operator, num1, num2) {
     return handleMultiply(num1, num2);
   } else if (operator === "/") {
     return handleDivide(num1, num2);
-  } else {
+  } else if (operator === "%") {
     return handleRemainder(num1, num2);
+  } else {
+    return handlePower(num1, num2);
   }
 }
 
@@ -97,7 +89,7 @@ function changeDisplay(text) {
       text = text.toString();
       combinedValues = Number(lastValue + text);
       operatorNumberArray[operatorNumberArray.length - 1] = combinedValues;
-      displayHistory.textContent += text;
+      updateHistory(text);
     } else if (
       areBothOperatorOrDecimal(text, lastValue) == true &&
       lastValue != undefined
@@ -105,7 +97,7 @@ function changeDisplay(text) {
       //do nothing
     } else {
       //if its mixed with numeric and other stuff
-      displayHistory.textContent += text;
+      updateHistory(text);
       operatorNumberArray.push(text);
     }
   }
@@ -118,7 +110,8 @@ function isNumeric(text) {
     text == "x" ||
     text == "/" ||
     text == "%" ||
-    text == "."
+    text == "." ||
+    text == "^"
   ) {
     return false;
   } else {
@@ -153,14 +146,25 @@ function computeAnswer() {
 
   displayText.textContent = roundAnswer(result);
   operatorNumberArray = [roundAnswer(result)];
-  displayHistory.textContent += "=";
+  updateHistory("=");
+  updateHistory(result);
 }
 
 function roundAnswer(result) {
-  if (result % 1 != 0) {
-    //if answer has decimals
-    return result.toFixed(9);
+  result = result.toString();
+  result = result.substr(0, 11);
+  result = Number(result);
+  return result;
+}
+
+function updateHistory(text) {
+  if (displayHistory.textContent.length + text.toString().length > 24) {
+    var newTextContent = displayHistory.textContent + text;
+    displayHistory.textContent = newTextContent.slice(
+      newTextContent.length - 24,
+      newTextContent.length
+    );
   } else {
-    return result;
+    displayHistory.textContent += text;
   }
 }
