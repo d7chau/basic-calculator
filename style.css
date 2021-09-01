@@ -24,7 +24,6 @@
   display: flex;
   align-items: flex-end;
   flex-direction: column;
-
   background-color: rgb(87, 87, 87);
   height: 100px;
   width: 335px;
@@ -34,7 +33,7 @@
   /*center*/
   position: absolute;
   top: 0;
-  bottom: 445px;
+  bottom: 50%; /* was 445px; */
   left: 0;
   right: 0;
   margin: auto;
@@ -148,6 +147,6 @@
   padding-top: 200px;
 }
 
-.is-zero {
+.span-two {
   grid-column: span 2;
 }
