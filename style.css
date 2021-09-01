@@ -31,9 +31,9 @@
   border-radius: 20px;
 
   /*center*/
-  position: absolute;
+  position: fixed;
   top: 0;
-  bottom: 45vh;
+  bottom: 445px;
   left: 0;
   right: 0;
   margin: auto;
