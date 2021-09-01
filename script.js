@@ -81,7 +81,7 @@ function handleOperate(operator, num1, num2) {
 }
 
 function changeDisplay(text) {
-  if (displayHistory.textContent.length <= "24") {
+  if (displayHistory.textContent.length <= "28") {
     var lastValue = operatorNumberArray[operatorNumberArray.length - 1];
     if (areBothNumeric(text, lastValue) == true && lastValue != undefined) {
       var combinedValues = 0;
@@ -152,16 +152,16 @@ function computeAnswer() {
 
 function roundAnswer(result) {
   result = result.toString();
-  result = result.substr(0, 11);
+  result = result.substr(0, 14);
   result = Number(result);
   return result;
 }
 
 function updateHistory(text) {
-  if (displayHistory.textContent.length + text.toString().length > 24) {
+  if (displayHistory.textContent.length + text.toString().length > 28) {
     var newTextContent = displayHistory.textContent + text;
     displayHistory.textContent = newTextContent.slice(
-      newTextContent.length - 24,
+      newTextContent.length - 28,
       newTextContent.length
     );
   } else {
