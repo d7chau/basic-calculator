@@ -33,7 +33,7 @@
   /*center*/
   position: absolute;
   top: 0;
-  bottom: 50%; /* was 445px; */
+  bottom: 45vh;
   left: 0;
   right: 0;
   margin: auto;
