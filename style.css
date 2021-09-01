@@ -18,11 +18,12 @@
   max-width: 360px;
   border-radius: 20px;
   margin: 0 auto;
+  position: relative;
 
-  display: flex;
+  /* display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
 }
 
 .calc-display {
@@ -38,7 +39,7 @@
   /*center*/
   position: absolute;
   top: 0;
-  bottom: 50vh;
+  bottom: 420px;
   left: 0;
   right: 0;
   margin: auto;
