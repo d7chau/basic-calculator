@@ -4,12 +4,19 @@
 
 ## Description
 
-Standard calculator built with HTML, CSS, and JavaScript.
+An online calculator with basic arithmetic operations built using __HTML5__, __CSS3__ and __JS ES6__.
 
 ## Features
 
-* All basic operations are supported (add, subtract, divide, multiply, exponent, remainder).
-* The display answer only allows 11 digits to be shown at a time
+* Operations supported:
+  * Addition
+  * Subtraction
+  * Division
+  * Multiplication
+  * Exponents
+  * Remainder
+  
+* The display screen answer only allows 11 digits to be shown at a time
 
 ## Live Demo
 
