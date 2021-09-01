@@ -15,10 +15,8 @@ An online calculator with basic arithmetic operations built using __HTML5__, __C
   * Divide (/)
   * Exponent (x¹)
   * Remainder (%)
-
 * Able to string together multiple operations in one line
-  
-* Display screen answer only allows 11 digits to be shown at a time
+* Display screen answer only allows 14 digits to be shown at a time
 
 ## Live Demo
 
